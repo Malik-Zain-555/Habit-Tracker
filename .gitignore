@@ -1,0 +1,6 @@
+# Secrets
+backend/.env
+backend/serviceAccountKey.json
+
+# Dependencies
+node_modules/
