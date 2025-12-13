@@ -6,13 +6,12 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 
 class ApiService {
-  // Use 10.0.2.2 for Android Emulator, localhost for iOS/Desktop
-  // If running on real device, you need your PC's LAN IP (e.g. 192.168.x.x)
-  static String get _baseUrl {
-    if (kIsWeb) return 'http://localhost:5000/api';
-    if (Platform.isAndroid) return 'http://10.0.2.2:5000/api';
-    return 'http://127.0.0.1:5000/api';
-  }
+static const String _baseUrl =
+    String.fromEnvironment(
+      'API_BASE_URL',
+      defaultValue: 'https://habit-tracker-amber-nine.vercel.app/api',
+    );
+
 
   Future<String?> _getToken() async {
     final prefs = await SharedPreferences.getInstance();
