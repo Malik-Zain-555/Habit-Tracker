@@ -7,9 +7,21 @@ import 'screens/home_screen.dart';
 import 'screens/main_screen.dart';
 import 'screens/splash_screen.dart';
 import 'theme.dart';
+import 'dart:async';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runZonedGuarded(
+    () {
+      WidgetsFlutterBinding.ensureInitialized();
+      runApp(MyApp());
+    },
+    (error, stack) {
+      debugPrint('CRASH: $error');
+      debugPrint('$stack');
+    },
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -21,7 +33,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => HabitProvider()),
       ],
       child: MaterialApp(
-        title: 'Life Solver',
+        title: 'HabStreak',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.lightTheme,
         home: AuthWrapper(),
